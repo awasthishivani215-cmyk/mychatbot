@@ -1314,11 +1314,15 @@ You're not alone in this - I'm here to guide you. 🌿"""
             # Sort by match score
             possible_diseases.sort(key=lambda x: x['match_score'], reverse=True)
             
-         try:
+           try:
     # Generate AI summary
-    ai_summary = self._generate_diagnosis_summary(symptoms, possible_diseases, patient_data)
+            ai_summary = self._generate_diagnosis_summary(
+            symptoms,
+            possible_diseases,
+            patient_data
+        )
 
-    response = {
+        response = {
         "message": ai_summary,
         "type": "diagnosis",
         "data": {
@@ -1335,6 +1339,7 @@ except Exception as e:
     return self._ensure_response_structure(
         self._get_error_response_enhanced(str(e), patient_data)
     )
+
 
 
     
@@ -1532,4 +1537,5 @@ Overall assessment based on symptoms described and patient history."""
     
 
     # Additional helper methods would be defined here...
+
 
