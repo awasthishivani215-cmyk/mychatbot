@@ -196,10 +196,13 @@ def save_patient_record():
         'message': 'Patient record saved successfully'
     })
 
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=8080)
 
 
 
     
+
 
 
 
