@@ -1314,27 +1314,28 @@ You're not alone in this - I'm here to guide you. 🌿"""
             # Sort by match score
             possible_diseases.sort(key=lambda x: x['match_score'], reverse=True)
             
-            # Generate AI summary
-            ai_summary = self._generate_diagnosis_summary(symptoms, possible_diseases, patient_data)
-            
-            response = {
-    "message": ai_summary,
-    "type": "diagnosis",
-    "data": {
-        "symptoms": symptoms,
-        "analysis": analysis,
-        "possible_diseases": possible_diseases[:5],
-        "urgency_level": analysis.get("urgency_level", "medium")
+         try:
+    # Generate AI summary
+    ai_summary = self._generate_diagnosis_summary(symptoms, possible_diseases, patient_data)
+
+    response = {
+        "message": ai_summary,
+        "type": "diagnosis",
+        "data": {
+            "symptoms": symptoms,
+            "analysis": analysis,
+            "possible_diseases": possible_diseases[:5],
+            "urgency_level": analysis.get("urgency_level", "medium")
+        }
     }
-}
 
-return self._ensure_response_structure(response)
+    return self._ensure_response_structure(response)
 
-            
-       except Exception as e:
+except Exception as e:
     return self._ensure_response_structure(
         self._get_error_response_enhanced(str(e), patient_data)
     )
+
 
     
     def _generate_diagnosis_summary(self, symptoms: List[str], possible_diseases: List[Dict], 
@@ -1531,3 +1532,4 @@ Overall assessment based on symptoms described and patient history."""
     
 
     # Additional helper methods would be defined here...
+
