@@ -12,6 +12,14 @@ import uuid
 from flask import send_from_directory
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+# Ensure directories exist (for Railway/Gunicorn)
+os.makedirs(os.path.join(BASE_DIR, 'patient_records'), exist_ok=True)
+os.makedirs(os.path.join(BASE_DIR, 'reports'), exist_ok=True)
+os.makedirs(os.path.join(BASE_DIR, 'templates'), exist_ok=True)
+os.makedirs(os.path.join(BASE_DIR, 'static'), exist_ok=True)
+os.makedirs(os.path.join(BASE_DIR, 'static/css'), exist_ok=True)
+os.makedirs(os.path.join(BASE_DIR, 'static/js'), exist_ok=True)
+
 
 app = Flask(
     __name__,
@@ -184,13 +192,8 @@ def save_patient_record():
     })
 
 
-if __name__ == '__main__':
-    os.makedirs('patient_records', exist_ok=True)
-    os.makedirs(os.path.join(BASE_DIR, 'reports'), exist_ok=True)
-    os.makedirs('templates', exist_ok=True)
-    os.makedirs('static', exist_ok=True)
-    os.makedirs('static/css', exist_ok=True)
-    os.makedirs('static/js', exist_ok=True)
+
 
     
+
 
