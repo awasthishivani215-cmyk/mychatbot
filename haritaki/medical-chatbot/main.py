@@ -1,6 +1,7 @@
 # main.py
-SESSIONS = {}
+# main.py
 
+SESSIONS = {}
 
 from flask import Flask, render_template, request, jsonify
 from flask_cors import CORS
@@ -10,6 +11,10 @@ from medical_api import MedicalChatbot
 from report_generator import ReportGenerator
 import uuid
 from flask import send_from_directory
+
+
+
+
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 # Ensure directories exist (for Railway/Gunicorn)
@@ -195,5 +200,6 @@ def save_patient_record():
 
 
     
+
 
 
