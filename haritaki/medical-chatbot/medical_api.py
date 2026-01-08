@@ -1317,24 +1317,25 @@ You're not alone in this - I'm here to guide you. 🌿"""
             # Generate AI summary
             ai_summary = self._generate_diagnosis_summary(symptoms, possible_diseases, patient_data)
             
-            return {
-                'status': 'success',
-                'symptoms': symptoms,
-                'analysis': analysis,
-                'possible_diseases': possible_diseases[:5],
-                'ai_summary': ai_summary,
-                'recommended_tests': self._suggest_comprehensive_tests(symptoms, patient_data),
-                'urgency_level': analysis.get('urgency_level', 'medium')
-            }
+            response = {
+    "message": ai_summary,
+    "type": "diagnosis",
+    "data": {
+        "symptoms": symptoms,
+        "analysis": analysis,
+        "possible_diseases": possible_diseases[:5],
+        "urgency_level": analysis.get("urgency_level", "medium")
+    }
+}
+
+return self._ensure_response_structure(response)
+
             
-        except Exception as e:
-            return {
-                'status': 'error',
-                'error': str(e),
-                'symptoms': symptoms,
-                'analysis': {'urgency_level': 'unknown'},
-                'possible_diseases': []
-            }
+       except Exception as e:
+    return self._ensure_response_structure(
+        self._get_error_response_enhanced(str(e), patient_data)
+    )
+
     
     def _generate_diagnosis_summary(self, symptoms: List[str], possible_diseases: List[Dict], 
                                    patient_data: Dict) -> str:
@@ -1528,4 +1529,5 @@ Overall assessment based on symptoms described and patient history."""
         except Exception as e:
             return f"Error saving record: {str(e)}"
     
+
     # Additional helper methods would be defined here...
