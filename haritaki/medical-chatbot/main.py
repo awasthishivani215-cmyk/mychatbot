@@ -192,4 +192,5 @@ if __name__ == '__main__':
     os.makedirs('static/css', exist_ok=True)
     os.makedirs('static/js', exist_ok=True)
 
-    app.run(debug=True, port=5000)
+    
+
